@@ -254,8 +254,11 @@ public class GdglabActivity extends ActionBarActivity {
                     
                     // You should send the registration ID to your server over HTTP, so it
                     // can use GCM/HTTP or CCS to send messages to your app.
-//                    sendRegistrationIdToBackend();
-                    sendRegistrationIdToCloud();
+                    if (AppConst.BEND_APP_ENGINE)
+                    	sendRegistrationIdToCloud();
+                    else
+                    	sendRegistrationIdToBackend();
+                    
 
                     
                 } catch (IOException ex) {

@@ -3,7 +3,7 @@ package com.gdglab.iot.tools;
 public final class AppConst {
 
 	
-    public static final String BEND_URL 			= "http://10.42.43.100/tps/";
+    public static final String BEND_URL 			= "http://10.42.43.102/tps/";
     public static final String ACTN_STORE 			= "store.php?";
     public static final String PRM_GCM_ID 			= "gcmid=";
     
@@ -22,8 +22,10 @@ public final class AppConst {
      * Substitute you own sender ID here. This is the project number you got
      * from the API Console, as described in "Getting Started."
      */
+    public static final boolean BEND_APP_ENGINE		= false;
+    
 
-    public static final String SENDER_ID 			= "	";
+    public static final String SENDER_ID 			= "";
 
 
     
