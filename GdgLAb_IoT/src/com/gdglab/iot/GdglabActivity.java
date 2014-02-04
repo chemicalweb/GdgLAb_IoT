@@ -20,22 +20,13 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.appspot.gdgrometestapp.clientEndpoint.ClientEndpoint;
-import com.appspot.gdgrometestapp.clientEndpoint.ClientEndpoint.Operation;
-import com.appspot.gdgrometestapp.clientEndpoint.ClientEndpoint.Operation.AddClient;
-import com.appspot.gdgrometestapp.clientEndpoint.model.ClientBean;
+
 import com.gdglab.iot.tools.AppConst;
 import com.gdglab.iot.tools.SendHttpRequestClass;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-//import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.json.gson.GsonFactory;
-//import com.appspot.gdgrometestapp.clientEndpoint.ClientEndpoint;
-//import com.appspot.gdgrometestapp.clientEndpoint.ClientEndpoint.Operation;
-//import com.appspot.gdgrometestapp.clientEndpoint.ClientEndpoint.Operation.AddClient;
-//import com.appspot.gdgrometestapp.clientEndpoint.model.ClientBean;
+
 
 /**
  * This demonstrates idiomatic usage of the Action Bar. The default Honeycomb theme
@@ -254,8 +245,8 @@ public class GdglabActivity extends ActionBarActivity {
                     
                     // You should send the registration ID to your server over HTTP, so it
                     // can use GCM/HTTP or CCS to send messages to your app.
-//                    sendRegistrationIdToBackend();
-                    sendRegistrationIdToCloud();
+                    sendRegistrationIdToBackend();
+
 
                     
                 } catch (IOException ex) {
@@ -323,55 +314,7 @@ public class GdglabActivity extends ActionBarActivity {
     	
       
     }
-    private void sendRegistrationIdToCloud() {
-    	
-		//riempi il bean con il registration id in modo opportuno dalla tua app android
-		ClientBean clientBean = new ClientBean();
-		//
-    	SharedPreferences sprefs = getGcmPreferences(this);
-    	String gcm_id_to_send =sprefs.getString(PROPERTY_REG_ID, "");
-    	clientBean.setRegistrationId(gcm_id_to_send);
-		try{
-			//Costruiamo l'oggeto che chiamerà il metodo remoto
-			//il primo parametro del costruttore per te da android sarà di tipo
-			//com.google.api.client.extensions.android.http.AndroidHttp
-			//il secondo parametro può essere del tipo che ho messo io...questo perché le API autogenerate a basso livello
-			//lavorano su oggetti JSON che vengono trasformati e mappati verso bean java e viceversa i bean java vengono mappati verso JSON
-			//questo perché a basso livello vengono effettuate delle chiamate REST da un web service REST
-			//il terzo parametro resta null
-			ClientEndpoint cep = new ClientEndpoint(AndroidHttp.newCompatibleTransport(), GsonFactory.getDefaultInstance(), null);
-			
-			//Ora chiamiamo l'oggeto che prepara la chiamata alle operazioni remote
-			Operation cepops = cep.operation();
-			
-			//Riempiamo la segnatura remota per l'operazione addclient che prende un ClientBean riempito del suo registrationId
-			//e lo memorizza sul datastore invocando il metodo remoto
-			AddClient clientAddOperation = cepops.addClient(clientBean);
-			
-			//lanciamo l'operazione remota di cui abbiamo preparato la segnatura alla riga sopra (viene aperta una sessione HTTP
-			//e viene chiamato il tutto
-			clientAddOperation.execute();
-			
-			
-			//questo non ci serve se lo chiamiamo da back end
-			//MessageEndpoint mep = new MessageEndpoint(GoogleNetHttpTransport.newTrustedTransport(), GsonFactory.getDefaultInstance(), null);
-			//com.appspot.gdgrometestapp.messageEndpoint.MessageEndpoint.Operation mepops = mep.operation();
-			
-			//Send sendOperation = mepops.send("Lo mando a tuttiiiiiiiiiiiiiiiiiiii :-)");
-			//sendOperation.execute();
-			
-			
-		}
-		catch(IOException e){
-			//Se bomba qui è successo qualche cosa nel transport HTTP o il server ha risposto pikke!! Meglio grabbare anche una
-			//generica Exception dopo questa...sia mai accade qualche cosa di inaspettato
-			//togli lo stack trace e semmai logga sull'androide :D
-			e.printStackTrace();
-		}
-    	
-      
-    }
-    
+ 
     public void onClickClear(final View view) {
     	mDisplay.setText("");
     }
