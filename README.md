@@ -10,8 +10,12 @@ Dependencies from:
 - google-play-services_lib
 
 There is also a sample 3rd part server in PHP. please set in php file the API key related to your Goolge developer Api Console project_id
-
 http://developer.android.com/google/gcm/gs.html
+
+
+In the branch "br_appengine" ther is an integration with Google AppEngine; related work of https://github.com/spulci/gdg_rome/tree/master/GdgRomeIOTDemoModel
+
+
 
 
 
